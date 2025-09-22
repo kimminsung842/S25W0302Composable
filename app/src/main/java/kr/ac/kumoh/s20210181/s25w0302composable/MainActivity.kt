@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -44,33 +45,41 @@ fun MainScreen() {
         Column (
             modifier = Modifier.padding(innerPadding)
         ) {
-            var count by remember { mutableStateOf(0) }
+            Counter()
+        }
+    }
+}
 
-            Column (
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement =  Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = count.toString(),
-                    modifier = Modifier
-                        .padding(8.dp)
-                        .fillMaxWidth()
-                        .background(Color(0xFFFE7A36)),
-                    color = Color.White,
-                    fontSize = 100.sp,
-                    textAlign = TextAlign.Center,
-                )
+@Composable
+fun ColumnScope.Counter() {
+    var count by remember { mutableStateOf(0) }
 
-                Button(
-                    modifier = Modifier.padding(8.dp).fillMaxWidth(),
-                    onClick = {
-                        count++
-                    }
-                ) {
-                    Text("증가", fontSize = 30.sp)
-                }
+    Column (
+        modifier = Modifier
+            .weight(1F)
+            .padding(8.dp)
+            .background(Color(0XFFE9F680)),
+        verticalArrangement =  Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = count.toString(),
+            modifier = Modifier
+                .padding(8.dp)
+                .fillMaxWidth()
+                .background(Color(0xFFFE7A36)),
+            color = Color.White,
+            fontSize = 100.sp,
+            textAlign = TextAlign.Center,
+        )
+
+        Button(
+            modifier = Modifier.padding(8.dp).fillMaxWidth(),
+            onClick = {
+                count++
             }
+        ) {
+            Text("증가", fontSize = 30.sp)
         }
     }
 }
